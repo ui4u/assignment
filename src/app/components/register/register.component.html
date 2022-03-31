@@ -1,0 +1,67 @@
+<div class="">
+    <div class="text-center mb-4">
+        <h2>User Registration</h2>
+    </div>
+    <div class="container" style="margin-top:10rem;">
+        <div class="row">
+            <div class="col-sm-4"></div>
+            <div *ngIf="!showSpinner" class="col-sm-4">
+
+                <div class="login-wrapper">
+                    <mat-card class="box">
+
+                        <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)"
+                            class="example-form text-center">
+                            <mat-card-content>
+                                <mat-form-field class="form-element">
+                                    <input matInput placeholder="Username" formControlName="username">
+                                    <mat-error
+                                        *ngIf="formGroup.get('username')?.invalid && formGroup.get('username')?.touched">
+                                        {{ titleAlert }}
+                                    </mat-error>
+                                </mat-form-field>
+
+                                <mat-form-field class="form-element">
+                                    <input type="email" matInput placeholder="Email address" formControlName="email">
+                                    <mat-error
+                                        *ngIf="!formGroup.controls['email'].valid && formGroup.controls['email'].touched">
+                                        {{getErrorEmail()}}
+                                    </mat-error>
+                                </mat-form-field>
+
+                                <mat-form-field class="form-element">
+                                    <textarea matInput placeholder="Bio" matTextareaAutosize matAutosizeMinRows="5"
+                                        matAutosizeMaxRows="6" formControlName="bio"></textarea>
+                                    <mat-error
+                                        *ngIf="!formGroup.controls['bio'].valid && formGroup.controls['bio'].touched">
+                                        Required field, must be between 10 and 100 characters.
+                                    </mat-error>
+                                </mat-form-field>
+
+                                <mat-form-field class="form-element">
+                                    <input type="password" matInput placeholder="Password" formControlName="password">
+                                    <mat-hint>Choose a password of at least eight characters, one uppercase letter and
+                                        one number</mat-hint>
+                                    <mat-error
+                                        *ngIf="!formGroup.controls['password'].valid && formGroup.controls['password'].touched">
+                                        {{ getErrorPassword() }}
+                                    </mat-error>
+                                </mat-form-field>
+
+                            </mat-card-content>
+                            <button mat-raised-button color="primary" style="margin-top:3rem;" type="submit"
+                                class="button" [disabled]="!formGroup.valid">Register</button>
+                        </form>
+                    </mat-card>
+                </div>
+            </div>
+            <div *ngIf="showSpinner" class="col-sm-4" style="margin-left:140px;">
+                <mat-spinner></mat-spinner>
+            </div>
+            <div class="col-sm-4"></div>
+
+        </div>
+
+
+    </div>
+</div>
